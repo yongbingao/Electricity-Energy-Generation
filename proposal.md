@@ -13,7 +13,7 @@ It will contain a map of the US which shows the total energy generated (thousand
 
 It will be a single page app mainly consists of two charts, a map and pie chart each showing different energy statistics. Each chart will have a title/labels that reflects the data being presented. The map will have different shades according to the percentage of total energy generated in the US. The details chart on the side will utilize different colors for different types of energy sources.
 
-
+![wireframe](https://github.com/yongbingao/JSproject/blob/master/Wireframe.png)
 
 ### Technologies employed
 
