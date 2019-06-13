@@ -1,0 +1,18 @@
+.us-states{
+    stroke: #000000;
+    stroke-width: 0.5px;
+}
+
+.us-states:hover {
+    fill: yellow;
+    cursor: pointer;
+}
+
+#hover-tooltip {
+    position: absolute;
+    background-color: white;
+    padding: 5px;
+    border: 1px solid gray;
+    opacity: 0;
+    white-space: nowrap;
+}
