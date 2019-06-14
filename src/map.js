@@ -1,4 +1,6 @@
-const renderMap = () => {
+import renderChart from "./detail_chart";
+
+const renderMap = fullDataset => {
     const width = 800;
     const height = 500;
     let yearDataset;
@@ -47,22 +49,26 @@ const renderMap = () => {
         document.getElementById("hover-tooltip").style.top = event.pageY - 35 + "px";
     }
 
-    const paths = document.getElementsByClassName("us-states")
+    const usMap = document.getElementsByClassName("us-map")[0];
 
-    document.getElementsByClassName("us-map")[0]
-        .addEventListener("mouseover", e => {
-            const name = e.target.__data__.properties.NAME;
-            const fullMessage = name.concat(": ", Number(yearDataset[name.concat(" : all fuels (utility-scale)")]).toLocaleString(), " thousand megawatthours");
-            const domEle = document.getElementById("hover-tooltip");
-            domEle.innerHTML = fullMessage;
-            domEle.style.opacity = 1;
-        });
+    usMap.addEventListener("mouseover", e => {
+        const name = e.target.__data__.properties.NAME;
+        const fullMessage = name.concat(": ", Number(yearDataset[name.concat(" : all fuels (utility-scale)")]).toLocaleString(), " thousand megawatthours");
+        const domEle = document.getElementById("hover-tooltip");
+        domEle.innerHTML = fullMessage;
+        domEle.style.opacity = 1;
+    });
 
-    document.getElementsByClassName("us-map")[0]
-        .addEventListener("mouseleave", e => {
-            document.getElementById("hover-tooltip").innerHTML = "";
-            document.getElementById("hover-tooltip").style.opacity = 0;
-        })
+    usMap.addEventListener("mouseleave", e => {
+        document.getElementById("hover-tooltip").innerHTML = "";
+        document.getElementById("hover-tooltip").style.opacity = 0;
+    })
+    
+    usMap.addEventListener("click", e => {
+        const name = e.target.__data__.properties.NAME;
+        renderChart("update", fullDataset[2018][name]);
+    })
+
     console.log(temp);
 }
 
