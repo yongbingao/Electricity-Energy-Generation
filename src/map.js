@@ -23,9 +23,13 @@ const renderMap = () => {
     const path = d3.geoPath()
         .projection(projection); 
 
-    const color = d3.scaleThreshold()
-        .domain([50000, 100000, 150000, 200000, 250000, 450000])
-        .range(["#add8e6", "#7da2cf", "#4361b3", "#283ea3", "#0b1291", "#000000"])
+    // const color = d3.scaleThreshold()
+    //     .domain([50000, 100000, 150000, 200000, 250000, 450000])
+    //     .range(["#add8e6", "#7da2cf", "#4361b3", "#283ea3", "#0b1291", "#000000"])
+
+    const color = d3.scaleLog()
+        .domain([1000, 10000, 100000, 1000000])
+        .range(d3.schemeBlues[4]);
 
     g.selectAll("path")
         .data(topojson.feature(usStates5mTopo, usStates5mTopo.objects.cb_2018_us_state_5m).features)
@@ -45,19 +49,20 @@ const renderMap = () => {
 
     const paths = document.getElementsByClassName("us-states")
 
-    for (let i = 0; i < paths.length; i++) {
-        paths[i].addEventListener("mouseover", e => {
+    document.getElementsByClassName("us-map")[0]
+        .addEventListener("mouseover", e => {
             const name = e.target.__data__.properties.NAME;
             const fullMessage = name.concat(": ", Number(yearDataset[name.concat(" : all fuels (utility-scale)")]).toLocaleString(), " thousand megawatthours");
             const domEle = document.getElementById("hover-tooltip");
             domEle.innerHTML = fullMessage;
             domEle.style.opacity = 1;
         });
-        paths[i].addEventListener("mouseleave", e => {
+
+    document.getElementsByClassName("us-map")[0]
+        .addEventListener("mouseleave", e => {
             document.getElementById("hover-tooltip").innerHTML = "";
             document.getElementById("hover-tooltip").style.opacity = 0;
         })
-    }
     console.log(temp);
 }
 
