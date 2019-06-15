@@ -1,18 +1,68 @@
+.us-map-container{
+    position: relative;
+}
+
 .us-states{
     stroke: #000000;
     stroke-width: 0.5px;
 }
 
-.us-states:hover {
+.us-state:hover {
     fill: yellow;
     cursor: pointer;
 }
 
-#hover-tooltip {
+#slider-container {
     position: absolute;
-    background-color: white;
-    padding: 5px;
-    border: 1px solid gray;
-    opacity: 0;
-    white-space: nowrap;
+    bottom: -40px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#year-slider {
+    width: 100%;
+}
+
+#year-slider {
+  -webkit-appearance: none; /* Hides the slider so that custom slider can be made */
+  background: transparent; /* Otherwise white in Chrome */
+}
+
+#year-slider:focus {
+    outline: none;
+}
+
+#year-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  border: 1px solid #555;
+  height: 25px;
+  width: 25px;
+  border-radius: 50%;
+  background-color: #555;
+  box-shadow: 0 0 0px #000000;
+  margin-top: -8.5px;
+}
+
+#year-slider::-webkit-slider-runnable-track {
+    height: 8px;
+    width: 100%;
+    border: none;
+    cursor: pointer;
+    background-color: rgb(210, 210, 210);
+    border-radius: 5px;
+}
+
+#year-slider:active::-webkit-slider-runnable-track {
+    background-color: rgba(190, 190, 190, 1);
+}
+
+#slider-current-year {
+    position: absolute;
+    top: 20px;
+    font-size: 20px;
+    font-weight: 400;
 }

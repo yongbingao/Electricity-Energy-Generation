@@ -19,7 +19,7 @@ const renderChart = (action, dataset) => {
         .outerRadius(d => d.y1);
 
     if(action == "create") {
-        const svg = d3.select(".main-container")
+        const svg = d3.select(".detail-chart-container")
             .append("svg")
             .attr("width", width)
             .attr("height", height)
