@@ -1,16 +1,17 @@
-const organizeData = () => {
+export const fuelList = [
+    "coal", 
+    "petroleum liquids", 
+    "petroleum coke",
+    "natural gas",
+    "other gases",
+    "nuclear",
+    "conventional hydroelectric",
+    "hydro-electric pumped storage",
+    "other"
+]
+
+export const organizeData = () => {
     const fullDataset = {};
-    const fuelList = [
-        "coal", 
-        "petroleum liquids", 
-        "petroleum coke",
-        "natural gas",
-        "other gases",
-        "nuclear",
-        "conventional hydroelectric",
-        "hydro-electric pumped storage",
-        "other"
-    ];
     const renewableList = [
         "wind",
         "geothermal",
@@ -29,7 +30,6 @@ const organizeData = () => {
         const keyArr = key.split(" : ");
         if (keyArr.length > 1 && !stateList.includes(keyArr[0])) {
             stateList.push(keyArr[0]);
-
         }
     })
 
@@ -99,4 +99,4 @@ const organizeData = () => {
     return fullDataset;
 }
 
-export default organizeData;
+// export default organizeData;
