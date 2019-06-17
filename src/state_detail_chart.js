@@ -86,11 +86,11 @@ const renderChart = (action, dataset) => {
             .style("stroke", "#ffffff")
             .style("fill", d => {
                 if (d.depth === 0) return "#ffffff";
-
+                
                 while (d.depth > 1) {
                     d = d.parent;
                 }
-
+                
                 return color(d.data.name);
             })
             .on("click", click)

@@ -95,7 +95,7 @@ const renderMap = fullDataset => {
     usMap.addEventListener("click", e => {
         const name = e.target.__data__.properties.NAME;
         renderChart("update", fullDataset[currentYear][name]);
-        stateYearlyChart(name);
+        stateYearlyChart("update", name);
     })
 
     document.getElementById("year-slider").addEventListener("input", e => {

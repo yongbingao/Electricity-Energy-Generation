@@ -1,6 +1,6 @@
 import {fuelList} from './data';
 
-export const stateYearlyChart = state => {
+export const stateYearlyChart = (action, state) => {
     const dataset = usEEG.filter( el => typeof el.description === 'number');
     const keyList = fuelList.map(fuel => state.concat(" : ", fuel));
     keyList.push(state.concat(" : other renewables"));
@@ -17,39 +17,56 @@ export const stateYearlyChart = state => {
     const y_axisLength = 200; // length of y-axis in our layout
 
     const yScale = d3.scaleLinear()
-        .domain([0, maxValue])
-        .range([0, y_axisLength]);
+                     .domain([0, maxValue])
+                     .range([0, y_axisLength]);
 
     const stack = d3.stack()
-        .keys(keyList)
-        .order(d3.stackOrderNone)
-        .offset(d3.stackOffsetNone);
+                    .keys(keyList)
+                    .order(d3.stackOrderNone)
+                    .offset(d3.stackOffsetNone);
 
     //Create SVG element
-    const svg = d3.select(".detail-chart-container")
-        .append("svg")
-        .attr("width", w)
-        .attr("height", h);
+    
+    
+    if (action === "create"){
+        const svg = d3.select(".detail-chart-container")
+                      .append("svg")
+                      .attr("class", "state-yearly-chart")
+                      .attr("width", w)
+                      .attr("height", h);
 
-    const groups = svg.selectAll("g.year")
-        .data(stack(dataset))
-        .enter().append("g")
-        .attr("class", "year")
-        .style("fill", (d, i) => { return colorScheme[i] });
+        const groups = svg.selectAll("g.year")
+                          .data(stack(dataset))
+                          .enter().append("g")
+                          .attr("class", "year")
+                          .style("fill", (d, i) => { return colorScheme[i] });
+    
+        // Select and generate rectangle elements
+        groups.selectAll("rect")
+              .data(d => { return d.slice(0, arrayLength) })
+              .enter()
+              .append("rect")
+              .attr("x", (d, i) => i * x_axisLength / arrayLength)
+              .attr("width", (x_axisLength / arrayLength) - 2)
+              .transition().duration(750)
+              .attr("y", (d, i) => h - yScale(d[1]))
+              .attr("height", d => { return (d[1] - d[0]) > 0 ? yScale((d[1] - d[0])) : 0 });
+    }
 
-    // Select and generate rectangle elements
-    groups.selectAll("rect")
-        .data(d => { return d.slice(0, arrayLength) })
-        .enter()
-        .append("rect")
-        .attr("x", (d, i) => i * x_axisLength / arrayLength)
-        .attr("y", (d, i) => {
-            debugger
-            return h - yScale(d[1])
-        })
-        .attr("width", (x_axisLength / arrayLength) - 2)
-        .attr("height", d => { return (d[1] - d[0]) > 0 ? yScale((d[1] - d[0])) : 0 });
+    if (action === "update") {
+        const groups = d3.selectAll(".year")
+                         .data(stack(dataset))
+                         .style("fill", (d, i) => colorScheme[i]);
 
+        groups.selectAll("rect")
+              .data(d => { return d.slice(0, arrayLength) })
+              .attr("width", (x_axisLength / arrayLength) - 2)
+              .attr("x", (d, i) => i * x_axisLength / arrayLength)
+              .transition().duration(750)
+              .attr("y", (d, i) => {debugger; return h - yScale(d[1] ? d[1] : d[0])})
+              .attr("height", d => { return (d[1] - d[0]) > 0 ? yScale((d[1] - d[0])) : 0 });
+        
+    }
     // Create y-axis
     // svg.append("line")
     //     .attr("x1", 30)
