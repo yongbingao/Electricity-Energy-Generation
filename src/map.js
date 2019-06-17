@@ -1,4 +1,5 @@
-import renderChart from "./detail_chart";
+import renderChart from "./state_detail_chart";
+import {stateYearlyChart} from "./state_yearly_chart";
 
 function renderSlider() {
     const slider = document.createElement("div");
@@ -94,6 +95,7 @@ const renderMap = fullDataset => {
     usMap.addEventListener("click", e => {
         const name = e.target.__data__.properties.NAME;
         renderChart("update", fullDataset[currentYear][name]);
+        stateYearlyChart(name);
     })
 
     document.getElementById("year-slider").addEventListener("input", e => {

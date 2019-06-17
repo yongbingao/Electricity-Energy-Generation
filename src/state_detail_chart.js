@@ -4,7 +4,7 @@ const renderChart = (action, dataset) => {
     const width = 300;
     const height = 300;
     const radius = Math.min(width, height) / 2;
-    const fullFuelList = fuelList.push("other renewables");
+    const fullFuelList = fuelList.slice().push("other renewables");
 
     //d3 color scheme set 3
     const colorScheme = ["#d9d9d9", "#bc80bd", "#bebada", "#ffed6f", "#fb8072", "#fdb462", "#80b1d3", "#8dd3c7", "#ffffb3", "#b3de69"];
@@ -19,14 +19,14 @@ const renderChart = (action, dataset) => {
                 .range([0, radius]);
 
     const partition = d3.partition();
-    debugger
+
     const root = d3.hierarchy(dataset)
                    .sum(d => d.output);
-    debugger
+
     const arc = d3.arc()
-                  .startAngle(d => { debugger; return Math.max(0, Math.min(2 * Math.PI, x(d.x0)))})
+                  .startAngle(d => {return Math.max(0, Math.min(2 * Math.PI, x(d.x0)))})
                   .endAngle(d => Math.max(0, Math.min(2 * Math.PI, x(d.x1))))
-                  .innerRadius(d => {debugger; return Math.max(0, y(d.y0))})
+                  .innerRadius(d => {return Math.max(0, y(d.y0))})
                   .outerRadius(d => Math.max(0, y(d.y1)))
                   .cornerRadius(4);
 
