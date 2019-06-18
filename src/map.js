@@ -24,9 +24,18 @@ function renderSlider() {
     document.getElementById("slider-current-year").style.left = `calc( 100% - 12.5px - ${document.getElementById("slider-current-year").offsetWidth / 2}px)`;
 }
 
+function addUSMapHeader() {
+    const usMapHeader = document.createElement("h2");
+    usMapHeader.setAttribute("id", "us-map-header");
+    usMapHeader.innerHTML = "State Net Electricity Generation (All fuels - utility scale)";
+    document.getElementsByClassName("us-map-container")[0].appendChild(usMapHeader);
+}
+
 const renderMap = fullDataset => {
-    const width = 800;
-    const height = 500;
+    // addUSMapHeader();
+
+    const width = 720;
+    const height = 450;
     let currentYearDataset;
     let currentYear = 2018;
     const temp = [];
@@ -34,6 +43,7 @@ const renderMap = fullDataset => {
     usEEG.forEach(el => {
         if (el.description === currentYear) currentYearDataset = el;
     })
+
 
     const svg = d3.select(".us-map-container")
         .append("svg")
@@ -71,13 +81,12 @@ const renderMap = fullDataset => {
         })
 
     renderSlider();
+    const usMap = document.getElementsByClassName("us-states")[0];
 
     document.onmousemove = (event) => {
         document.getElementById("hover-tooltip").style.left = event.pageX + "px";
         document.getElementById("hover-tooltip").style.top = event.pageY - 35 + "px";
     }
-
-    const usMap = document.getElementsByClassName("us-states")[0];
 
     usMap.addEventListener("mouseover", e => {
         const name = e.target.__data__.properties.NAME;
@@ -98,18 +107,20 @@ const renderMap = fullDataset => {
         stateYearlyChart("update", name);
     })
 
-    document.getElementById("year-slider").addEventListener("input", e => {
-        currentYear = Number(e.target.value);
-        usEEG.forEach(el => { if(el.description === currentYear) currentYearDataset = el;});
-        const sliderLabel = document.getElementById("slider-current-year");
-        sliderLabel.innerHTML = currentYear;
-        sliderLabel.style.left = `calc(${(currentYear - 2001) * 100 / 18}% + 12.5px - ${sliderLabel.offsetWidth / 2}px)`;
-        debugger
-        d3.selectAll(".us-state").attr("fill", d => {
-            return color(currentYearDataset[d.properties.NAME.concat(" : all fuels (utility-scale)")])
-        })
-    });
-
+    document.getElementById("year-slider")
+            .addEventListener("input", e => {
+                const sliderLabel = document.getElementById("slider-current-year");
+                currentYear = Number(e.target.value);
+                
+                usEEG.forEach(el => { if(el.description === currentYear) currentYearDataset = el;});
+                sliderLabel.innerHTML = currentYear;
+                sliderLabel.style.left = `calc(${(currentYear - 2001) * 100 / 18}% + 12.5px - ${sliderLabel.offsetWidth / 2}px)`;
+                
+                d3.selectAll(".us-state")
+                    .attr("fill", d => {
+                        return color(currentYearDataset[d.properties.NAME.concat(" : all fuels (utility-scale)")])
+                    })
+            });
     
     console.log(temp);
 }

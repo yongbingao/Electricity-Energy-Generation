@@ -5,8 +5,8 @@ export const stateYearlyChart = (action, state) => {
     const keyList = fuelList.map(fuel => state.concat(" : ", fuel));
     keyList.push(state.concat(" : other renewables"));
     // Width and height of SVG
-    const w = 400;
-    const h = 200;
+    const w = 450;
+    const h = 225;
     const colorScheme = ["#d9d9d9", "#bc80bd", "#bebada", "#ffed6f", "#fb8072", "#fdb462", "#80b1d3", "#8dd3c7", "#ffffb3", "#b3de69"];
 
 
@@ -14,7 +14,7 @@ export const stateYearlyChart = (action, state) => {
     const arrayLength = dataset.length; // length of dataset
     const maxValue = d3.max(dataset, d => d[state.concat(" : all fuels (utility-scale)")])
     const x_axisLength = 400; // length of x-axis in our layout
-    const y_axisLength = 200; // length of y-axis in our layout
+    const y_axisLength = 190; // length of y-axis in our layout
 
     const yScale = d3.scaleLinear()
                      .domain([0, maxValue])
@@ -39,18 +39,20 @@ export const stateYearlyChart = (action, state) => {
                           .data(stack(dataset))
                           .enter().append("g")
                           .attr("class", "year")
-                          .style("fill", (d, i) => { return colorScheme[i] });
+                          .style("fill", (d, i) => colorScheme[i] );
     
+        drawAxis(svg);
+
         // Select and generate rectangle elements
         groups.selectAll("rect")
-              .data(d => { return d.slice(0, arrayLength) })
+              .data(d => d.slice(0, arrayLength))
               .enter()
               .append("rect")
-              .attr("x", (d, i) => i * x_axisLength / arrayLength)
+              .attr("x", (d, i) => i * x_axisLength / arrayLength + 50)
               .attr("width", (x_axisLength / arrayLength) - 2)
               .transition().duration(750)
-              .attr("y", (d, i) => h - yScale(d[1]))
-              .attr("height", d => { return (d[1] - d[0]) > 0 ? yScale((d[1] - d[0])) : 0 });
+              .attr("y", (d, i) => h - yScale(d[1]) - 35)
+              .attr("height", d => (d[1] - d[0]) > 0 ? yScale((d[1] - d[0])) : 0 );
     }
 
     if (action === "update") {
@@ -59,37 +61,52 @@ export const stateYearlyChart = (action, state) => {
                          .style("fill", (d, i) => colorScheme[i]);
 
         groups.selectAll("rect")
-              .data(d => { return d.slice(0, arrayLength) })
+              .data(d => d.slice(0, arrayLength))
               .attr("width", (x_axisLength / arrayLength) - 2)
-              .attr("x", (d, i) => i * x_axisLength / arrayLength)
+              .attr("x", (d, i) => i * x_axisLength / arrayLength + 50)
               .transition().duration(750)
-              .attr("y", (d, i) => {debugger; return h - yScale(d[1] ? d[1] : d[0])})
-              .attr("height", d => { return (d[1] - d[0]) > 0 ? yScale((d[1] - d[0])) : 0 });
+              .attr("y", (d, i) => h - yScale(d[1] ? d[1] : d[0]) - 35)
+              .attr("height", d => (d[1] - d[0]) > 0 ? yScale((d[1] - d[0])) : 0);
         
+        const yyScale = d3.scaleLinear()
+                          .range([(h - 25), 0])
+                          .domain([0, maxValue / 1000]);   
+        const yAxis = d3.axisLeft(yyScale);      
+        
+        d3.select(".y-axis").call(yAxis.ticks(5));
     }
-    // Create y-axis
-    // svg.append("line")
-    //     .attr("x1", 30)
-    //     .attr("y1", 75)
-    //     .attr("x2", 30)
-    //     .attr("y2", 175)
-    //     .attr("stroke-width", 1)
-    //     .attr("stroke", "black");
 
-    // // Create x-axis
-    // svg.append("line")
-    //     .attr("x1", 30)
-    //     .attr("y1", 175)
-    //     .attr("x2", 130)
-    //     .attr("y2", 175)
-    //     .attr("stroke-width", 2)
-    //     .attr("stroke", "black");
+    function drawAxis(svg) {
+        const xScale = d3.scaleLinear()
+                         .range([50, w])
+                         .domain([2000.5, 2018.5])
+        const yyScale = d3.scaleLinear()
+                          .range([(h-35), 0])
+                          .domain([0, maxValue/1000]);
+    
+        const xAxis = d3.axisBottom(xScale).tickFormat( d => `${d}`);
+        const yAxis = d3.axisLeft(yyScale);
 
-    // // Add a Label
-    // // y-axis label
-    // svg.append("text")
-    //     .attr("class", "y label")
-    //     .attr("text-anchor", "end")
-    //     .text("No. of Rats")
-    //     .attr("transform", "translate(20, 80) rotate(-90)");
+        svg.append("g")
+            .attr("class", "x-axis")
+            .attr("transform", `translate(0, ${y_axisLength})`)
+            .call(xAxis.ticks(9));
+    
+        svg.append("g")
+            .attr("class", "y-axis")
+            .attr("transform", "translate(50, 0)")
+            .call(yAxis.ticks(5));
+
+        svg.append("text")
+            .attr("class", "y-label")
+            .attr("text-anchor", "end")
+            .text("Energy Generation(TWh)")
+            .attr("transform", "translate(0, 20) rotate(-90)");
+
+        svg.append("text")
+            .attr("class", "x-label")
+            .attr("text-anchor", "start")
+            .text("Year")
+            .attr("transform", `translate(${w/2}, ${h})`);
+    }
 }

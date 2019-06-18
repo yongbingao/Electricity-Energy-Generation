@@ -1,10 +1,21 @@
 .us-map-container{
+    /* flex: 0 0 50%; */
+    width: 55%;
     position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#us-map-header {
+  margin: 10px 0;
+  font-size: 22px;
+  font-weight: 400;
 }
 
 .us-states{
     stroke: #000000;
-    stroke-width: 0.5px;
+    stroke-width: 0.25px;
 }
 
 .us-state:hover {
@@ -14,7 +25,7 @@
 
 #slider-container {
     position: absolute;
-    bottom: 40px;
+    bottom: 60px;
     left: 50%;
     transform: translateX(-50%);
     width: 50%;

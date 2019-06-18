@@ -6,8 +6,9 @@ body {
 }
 
 h1 {
-    font-size: 40px;
-    font-weight: 400;
+    font-size: 36px;
+    font-weight: 700;
+    margin: 15px 0;
 }
 
 #hover-tooltip {
@@ -28,5 +29,26 @@ h1 {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    width: 90%;
+    width: 95%;
 }
+
+/* TO BE REMOVED: borders on containers for development */
+/* .us-map-container{
+    border: 0.25px solid black;
+} */
+
+/* .main-container {
+    border: 0.25px solid black;
+} */
+
+/* .detail-chart-container {
+    border: 0.25px solid black;
+}
+
+.state-details-chart {
+    border: 0.25px solid black;
+}*/
+
+/* .state-yearly-chart {
+    border: 0.25px solid black;
+} */
