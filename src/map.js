@@ -38,7 +38,6 @@ const renderMap = fullDataset => {
     const height = 450;
     let currentYearDataset;
     let currentYear = 2018;
-    const temp = [];
 
     usEEG.forEach(el => {
         if (el.description === currentYear) currentYearDataset = el;
@@ -76,7 +75,6 @@ const renderMap = fullDataset => {
         .attr("class", "us-state")
         .attr("d", path)
         .attr("fill", d => {
-            temp.push(currentYearDataset[d.properties.NAME.concat(" : all fuels (utility-scale)")]);
             return color(currentYearDataset[d.properties.NAME.concat(" : all fuels (utility-scale)")]);
         })
 
@@ -121,8 +119,6 @@ const renderMap = fullDataset => {
                         return color(currentYearDataset[d.properties.NAME.concat(" : all fuels (utility-scale)")])
                     })
             });
-    
-    console.log(temp);
 }
 
 export default renderMap;
