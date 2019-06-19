@@ -84,13 +84,13 @@ const renderMap = fullDataset => {
     const usMap = document.getElementsByClassName("us-states")[0];
 
     document.onmousemove = (event) => {
-        document.getElementById("hover-tooltip").style.left = event.pageX + "px";
+        document.getElementById("hover-tooltip").style.left = event.pageX + 10 + "px";
         document.getElementById("hover-tooltip").style.top = event.pageY - 35 + "px";
     }
 
     usMap.addEventListener("mouseover", e => {
         const name = e.target.__data__.properties.NAME;
-        const fullMessage = name.concat(": ", Number(currentYearDataset[name.concat(" : all fuels (utility-scale)")]).toLocaleString(), " thousand megawatthours");
+        const fullMessage = name.concat(": ", Number(currentYearDataset[name.concat(" : all fuels (utility-scale)")]).toLocaleString(), " gigawatthours");
         const domEle = document.getElementById("hover-tooltip");
         domEle.innerHTML = fullMessage;
         domEle.style.opacity = 1;

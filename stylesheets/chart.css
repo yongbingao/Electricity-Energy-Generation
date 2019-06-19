@@ -1,5 +1,4 @@
 .right-section-container{
-  /* flex: 0 0 40%; */
   width: 45%;
   display: flex;
   flex-direction: column;
@@ -17,6 +16,21 @@
   margin: 0;
   margin-bottom: 10px;
   font-size: 15px;
+}
+
+.detail-chart-container{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-right: 15px;
+}
+
+.state-details-chart-paths > path:hover {
+    cursor: pointer;
+}
+
+.state-details-chart-paths > path:first-child {
+    cursor: default;
 }
 
 .state-yearly-chart{

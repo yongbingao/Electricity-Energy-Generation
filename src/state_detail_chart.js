@@ -62,6 +62,37 @@ const renderChart = (action, dataset) => {
 
         displayPaths(g);
         renderLegend();
+
+        const stateDetailsChart = document.getElementsByClassName("state-details-chart-paths")[0];
+
+        stateDetailsChart.addEventListener("mouseover", e => {
+            let name;
+            let totalValue;
+            let currentParent;
+            const value = e.target.__data__.value;
+            
+            if(e.target.__data__.parent === null) {
+                totalValue = value;
+                name = "all fuels (utility-scale)";
+            } else {
+                currentParent = e.target.__data__.parent;
+                while(currentParent.depth !== 0) currentParent = currentParent.parent;
+
+                totalValue = currentParent.value;
+                name = e.target.__data__.data.name;
+            }
+            
+            const valPercent = (value / totalValue * 100).toFixed(2);
+            const fullMessage = name[0].toUpperCase().concat(name.slice(1), "<br/>", value.toLocaleString()," GWh", "<br/>", valPercent, "%");
+            const domEle = document.getElementById("hover-tooltip");
+            domEle.innerHTML = fullMessage;
+            domEle.style.opacity = 1;
+        })
+
+        stateDetailsChart.addEventListener("mouseleave", e => {
+            document.getElementById("hover-tooltip").innerHTML = "";
+            document.getElementById("hover-tooltip").style.opacity = 0;
+        })
     }
     else if(action == "update"){
         const g = d3.select(".state-details-chart-paths");
@@ -113,8 +144,6 @@ const renderChart = (action, dataset) => {
                 return color(d.data.name);
             })
             .on("click", click)
-            .append("title")
-            .text(d => `${d.data.name}: ${d.value.toLocaleString()}`);
     }
 }
 
