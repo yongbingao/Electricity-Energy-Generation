@@ -1,22 +1,7 @@
 import {fuelList} from './data';
 import {renderLegend} from "./legend";
 
-// function addDetailChartContainerHeader() {
-//     const detailChartContainerHeader = document.createElement("h2");
-//     detailChartContainerHeader.setAttribute("id", "detail-chart-container-header");
-//     detailChartContainerHeader.innerHTML = "State Generation Details";
-
-//     const detailChartContainerHeaderUnit = document.createElement("h3");
-//     detailChartContainerHeaderUnit.setAttribute("id", "detail-chart-container-header-unit");
-//     detailChartContainerHeaderUnit.innerHTML = "(thousand megawatthours - 1,000 MWh)";
-
-//     document.getElementsByClassName("detail-chart-container")[0].appendChild(detailChartContainerHeader);
-//     document.getElementsByClassName("detail-chart-container")[0].appendChild(detailChartContainerHeaderUnit);
-// }
-
 const renderChart = (action, dataset) => {
-    // addDetailChartContainerHeader();
-
     const width = 300;
     const height = 300;
     const radius = Math.min(width, height) / 2;

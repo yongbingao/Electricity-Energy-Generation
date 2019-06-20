@@ -88,7 +88,7 @@ const renderMap = fullDataset => {
 
     usMap.addEventListener("mouseover", e => {
         const name = e.target.__data__.properties.NAME;
-        const fullMessage = name.concat(": ", Number(currentYearDataset[name.concat(" : all fuels (utility-scale)")]).toLocaleString(), " gigawatthours");
+        const fullMessage = name.concat(": ", Number(currentYearDataset[name.concat(" : all fuels (utility-scale)")]).toLocaleString(), " gigawatthours (GWh)");
         const domEle = document.getElementById("hover-tooltip");
         domEle.innerHTML = fullMessage;
         domEle.style.opacity = 1;
@@ -103,6 +103,11 @@ const renderMap = fullDataset => {
         const name = e.target.__data__.properties.NAME;
         renderChart("update", fullDataset[currentYear][name]);
         stateYearlyChart("update", name);
+    })
+
+    document.getElementById("us-data").addEventListener("click", e => {
+        renderChart("update", fullDataset[currentYear]["United States"]);
+        stateYearlyChart("update", "United States");
     })
 
     document.getElementById("year-slider")

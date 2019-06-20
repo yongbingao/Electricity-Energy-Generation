@@ -3,12 +3,13 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
+    position: relative;
 }
 
 h1 {
     font-size: 36px;
     font-weight: 700;
-    margin: 15px 0;
+    margin: 5px 0;
 }
 
 #hover-tooltip {
@@ -32,23 +33,51 @@ h1 {
     width: 95%;
 }
 
-/* TO BE REMOVED: borders on containers for development */
-/* .us-map-container{
-    border: 0.25px solid black;
-} */
-
-/* .main-container {
-    border: 0.25px solid black;
-} */
-
-/* .detail-chart-container {
-    border: 0.25px solid black;
+#nav-bar {
+    position: absolute;
+    right: 20px;
+    font-size: 30px;
 }
 
-.state-details-chart {
-    border: 0.25px solid black;
-}*/
+.fab {
+    color: black;
+    padding: 4px 6px 4px 7px;
+    margin: 5px 5px;
+    border: 0.5px solid white;
+    border-radius: 5px;
+    background-color: white;
+}
 
-/* .state-yearly-chart {
-    border: 0.25px solid black;
-} */
+.fab:hover{
+    box-shadow: 0 0 10px rgba(150, 150, 150, .8);
+}
+
+#footer{
+    position: absolute;
+    bottom: -50px;
+    right: 10px;
+    font-size: 12px;
+}
+
+#footer span {
+    margin: 0 5px;
+}
+
+#us-data{
+    position: absolute;
+    top: 75px;
+    left: 760px;
+    padding: 5px 10px;
+    border-radius: 5px;
+    border: none;
+    outline: none;
+    background-color: rgba(200, 200, 200, .4);
+    font-family: 'Volkhov', serif;
+    box-shadow: none;
+    transition: box-shadow 200ms ease-out;
+}
+
+#us-data:hover{
+    cursor: pointer;
+    box-shadow: 0 0 10px rgba(200, 200, 200, 1);
+}

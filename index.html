@@ -8,6 +8,8 @@
     <link rel="stylesheet" href="./stylesheets/map.css">
     <link rel="stylesheet" href="./stylesheets/index.css">
     <link rel="stylesheet" href="./stylesheets/chart.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css"
+        integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/css?family=Volkhov:400,700&display=swap" rel="stylesheet">
     <script src="https://d3js.org/d3.v5.min.js"></script>
     <script src="https://unpkg.com/topojson@3"></script>
@@ -20,18 +22,40 @@
 
     <h1>U.S. Electricity Energy Generation</h1>
     <div id="hover-tooltip"></div>
+    <nav id="nav-bar">
+        <a target="_blank" href="https://github.com/yongbingao"><i class="fab fa-github-square"></i></a>
+        <a target="_blank" href="https://www.linkedin.com/in/yong-bin-gao/"><i class="fab fa-linkedin"></i></a>
+    </nav>
+    <button id="us-data">
+        Display US Data
+    </button>
     <div class="main-container">
         <div class="us-map-container">
             <h2 id="us-map-header">State Net Electricity Generation (All fuels - utility scale)</h2>
         </div>
         <div class="right-section-container">
             <h2 id="right-section-container-header">Generation Details</h2>
-            <h3 id="right-section-container-header-unit">(thousand megawatthours - 1,000 MWh)</h3>
+            <h3 id="right-section-container-header-unit">gigawatthours (GWh) = 1 billion watthour</h3>
             <div class="charts-container">
                 <div class="detail-chart-container"></div>
             </div>
         </div>
     </div>
+    <footer id="footer">
+        <span>U.S. State geographic data generated from 
+            <a target="_blank" href="https://www.census.gov/geographies/mapping-files/time-series/geo/carto-boundary-file.html">
+                Census Bureau’s Cartographic Boundary Files
+            </a>
+            . 
+        </span>
+        <span>
+            All energy generation data from 
+            <a target="_blank" href="https://www.eia.gov/">
+                U.S. Energy Information Administration
+            </a>
+            .
+        </span>
+    </footer>
 
 </body>
 </html>
