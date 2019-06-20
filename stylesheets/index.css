@@ -63,6 +63,10 @@ h1 {
     margin: 0 5px;
 }
 
+#footer a {
+    color: #0000EE;
+}
+
 #us-data{
     position: absolute;
     top: 75px;
