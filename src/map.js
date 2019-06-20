@@ -101,13 +101,22 @@ const renderMap = fullDataset => {
     
     usMap.addEventListener("click", e => {
         const name = e.target.__data__.properties.NAME;
+        const usDataButton = document.getElementById("us-data");
+        
         renderChart("update", fullDataset[currentYear][name]);
         stateYearlyChart("update", name);
+
+        usDataButton.style.opacity = 1;
+        usDataButton.style.visibility = "visible";
     })
 
     document.getElementById("us-data").addEventListener("click", e => {
+        const usDataButton = document.getElementById("us-data");
+
         renderChart("update", fullDataset[currentYear]["United States"]);
         stateYearlyChart("update", "United States");
+        usDataButton.style.opacity = 0;
+        usDataButton.style.visibility = "hidden";
     })
 
     document.getElementById("year-slider")

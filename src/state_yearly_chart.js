@@ -88,7 +88,7 @@ export const stateYearlyChart = (action, state) => {
               .attr("height", d => (d[1] - d[0]) > 0 ? yScale((d[1] - d[0])) : 0);
         
         const yyScale = d3.scaleLinear()
-                          .range([(h - 25), 0])
+                          .range([(h - 35), 0])
                           .domain([0, maxValue / 1000]);   
         const yAxis = d3.axisLeft(yyScale);      
         

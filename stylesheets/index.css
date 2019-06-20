@@ -70,15 +70,17 @@ h1 {
 #us-data{
     position: absolute;
     top: 75px;
-    left: 760px;
+    left: 755px;
     padding: 5px 10px;
     border-radius: 5px;
     border: none;
     outline: none;
     background-color: rgba(200, 200, 200, .4);
     font-family: 'Volkhov', serif;
+    opacity: 0;
+    visibility: hidden;
     box-shadow: none;
-    transition: box-shadow 200ms ease-out;
+    transition: visibility 150ms, opacity 500ms, box-shadow 200ms ease-out;
 }
 
 #us-data:hover{
