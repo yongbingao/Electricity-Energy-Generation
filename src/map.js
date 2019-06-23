@@ -54,8 +54,8 @@ const renderMap = fullDataset => {
         .attr("class", "us-states")
 
     const projection = d3.geoAlbersUsa()
-        .scale(1000)
-        .translate([width / 2, height / 2]);
+        .scale(975)
+        .translate([width / 2, height / 2 - 3]);
 
     const path = d3.geoPath()
         .projection(projection); 
