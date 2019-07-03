@@ -86,6 +86,19 @@ const renderMap = fullDataset => {
         document.getElementById("hover-tooltip").style.top = event.pageY - 35 + "px";
     }
 
+    document.getElementById("us-map-header").addEventListener("mouseover", e =>{
+        const domEle = document.getElementById("hover-tooltip");
+    domEle.innerHTML = `Utility scale refers to facilities<br/>
+                        that have a total generation capacity <br/>
+                        of one megawatt or greater.`;
+        domEle.style.opacity = 1;
+    })
+
+    document.getElementById("us-map-header").addEventListener("mouseleave", e => {
+        document.getElementById("hover-tooltip").innerHTML = "";
+        document.getElementById("hover-tooltip").style.opacity = 0;
+    })
+
     usMap.addEventListener("mouseover", e => {
         const name = e.target.__data__.properties.NAME;
         const fullMessage = name.concat(": ", Number(currentYearDataset[name.concat(" : all fuels (utility-scale)")]).toLocaleString(), " gigawatthours (GWh)");

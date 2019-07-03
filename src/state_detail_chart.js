@@ -78,6 +78,17 @@ const renderChart = (action, dataset) => {
             document.getElementById("hover-tooltip").innerHTML = "";
             document.getElementById("hover-tooltip").style.opacity = 0;
         })
+
+        document.getElementById("right-section-container-header").addEventListener("mouseover", e => {
+            const domEle = document.getElementById("hover-tooltip");
+            domEle.innerHTML = "Total generation <br/>breakdown into fuel types.";
+            domEle.style.opacity = 1;
+        })
+
+        document.getElementById("right-section-container-header").addEventListener("mouseleave", e => {
+            document.getElementById("hover-tooltip").innerHTML = "";
+            document.getElementById("hover-tooltip").style.opacity = 0;
+        })
     }
     else if(action == "update"){
         const g = d3.select(".state-details-chart-paths");
