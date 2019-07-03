@@ -107,3 +107,18 @@
   font-size: 12px;
   text-align: center;
 }
+
+@media screen and (max-width: 1250px){
+  .us-map-container{
+    width: 720px;
+    margin-bottom: 150px;
+  }
+
+  .map-legend-container{
+    bottom: -120px;
+  }
+
+  #slider-container {
+    bottom: -60px;
+  }
+}

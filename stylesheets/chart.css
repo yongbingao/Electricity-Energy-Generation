@@ -44,6 +44,7 @@
 .charts-container{
   display: flex;
   width: 100%;
+  justify-content: space-around;
 }
 
 .legend-container {
@@ -61,23 +62,19 @@
 }
 
 .legend-list li {
-  margin-top: 14px;
-  padding-bottom: 10px
+  display: flex;
+  align-items: center;
+  margin: 15px 0;
 }
 
-.legend-list li:first-child{
-  margin-top: 2px;
+.legend-list div{
+  min-width: 18px;
+  height: 18px;
+  margin-right: 15px;
 }
 
-.legend-list li:nth-child(7){
-  margin: 0;
-  padding: 0;
-  padding-top: 6px;
-}
-
-.legend-list li:nth-child(8){
-  padding: 0;
-  margin: 0;
-  margin-top: 7px;
-  margin-bottom: 16px;
+@media screen and (max-width: 1250px){
+  .right-section-container{
+    width: 85%;
+  }
 }

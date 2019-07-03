@@ -30,25 +30,19 @@ export const renderLegend = () => {
     const colorScheme = ["#d9d9d9", "#bc80bd", "#bebada", "#ffed6f", "#fb8072", "#fdb462", "#80b1d3", "#8dd3c7", "#ffffb3", "#b3de69"];
     const keyList = fuelList.slice();
     keyList.push("other renewables");
-
-    const legendContainer = d3.select(".charts-container").append("svg").attr("class", "legend-container")
-
-    const legend = legendContainer.selectAll(".legend")
-        .data(colorScheme)
-        .enter().append("rect")
-        .attr("class", "legend")
-        .attr("transform", function (d, i) { return `translate(0, ${i*30})`; })
-        .attr("x", 10)
-        .attr("y", (d, i) => i * 10)
-        .attr("width", 18)
-        .attr("height", 18)
-        .style("fill", function (d, i) { return colorScheme[i]; });
     
     const unorderList = document.createElement('ul');
     unorderList.setAttribute("class", "legend-list")
-    keyList.forEach( el => {
+    keyList.forEach((el, idx) => {
         const listItem = document.createElement("li");
-        listItem.innerHTML = el[0].toUpperCase() + el.slice(1);
+        const listColor = document.createElement("div");
+        const listLabel = document.createElement("span");
+
+        listColor.setAttribute("style", `background-color: ${colorScheme[idx]}`);
+        listLabel.innerHTML = el[0].toUpperCase() + el.slice(1);
+
+        listItem.appendChild(listColor);
+        listItem.appendChild(listLabel);
         unorderList.appendChild(listItem);
     })
 
